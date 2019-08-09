@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Surefire suite" duration-ms="3074" started-at="2019-07-30T07:05:14Z" finished-at="2019-07-30T07:05:17Z">
+    <groups>
+    </groups>
+    <test name="Surefire test" duration-ms="3074" started-at="2019-07-30T07:05:14Z" finished-at="2019-07-30T07:05:17Z">
+      <class name="se.ff.bsc.Tests">
+        <test-method status="PASS" signature="DummyAPIShouldReturnEmployeeName()" name="DummyAPIShouldReturnEmployeeName" duration-ms="2863" started-at="2019-07-30T08:05:14Z" finished-at="2019-07-30T08:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- DummyAPIShouldReturnEmployeeName -->
+      </class> <!-- se.ff.bsc.Tests -->
+      <class name="se.ff.bsc.WhenComesTheBusTest">
+        <test-method status="PASS" signature="BusServiceShouldReturnEta()" name="BusServiceShouldReturnEta" duration-ms="123" started-at="2019-07-30T08:05:17Z" finished-at="2019-07-30T08:05:17Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- BusServiceShouldReturnEta -->
+      </class> <!-- se.ff.bsc.WhenComesTheBusTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

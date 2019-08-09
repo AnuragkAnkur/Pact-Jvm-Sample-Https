@@ -1,0 +1,88 @@
+{
+  "provider": {
+    "name": "BusService"
+  },
+  "consumer": {
+    "name": "UrlEncodedClient"
+  },
+  "interactions": [
+    {
+      "description": "A request for eta for bus number 613 to Hammersmith bus station",
+      "request": {
+        "method": "POST",
+        "path": "/v2/auth/token",
+        "headers": {
+          "Accept": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        "query": {
+          "client_id": [
+            "cVyyUM3sAx9u1yN8g8zCw9oYdYi2XFQK"
+          ],
+          "client_secret": [
+            "pkFpx45QcAya27tY"
+          ],
+          "grant_type": [
+            "client_credentials"
+          ],
+          "scope": [
+            "RESETPASSWORD"
+          ]
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "access_token": "VF92vEWLjBbZavBkw2bVhde68AXu",
+          "token_type": "Bearer",
+          "expires_in": "3599"
+        },
+        "matchingRules": {
+          "body": {
+            "$.access_token": {
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "[0-9a-zA-Z]*"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.token_type": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.expires_in": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "There is a bus with number 613 arriving to Hammersmith bus station"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.8"
+    }
+  }
+}

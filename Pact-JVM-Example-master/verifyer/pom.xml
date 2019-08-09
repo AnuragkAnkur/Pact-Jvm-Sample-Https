@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>se.ff.bsv</groupId>
+  <artifactId>verifyer</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>verifyer</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.4.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.4.2</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/au.com.dius/pact-jvm-provider-junit -->
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>3.1.1</version>
+      <scope>test</scope>
+    </dependency>
+<!--    <dependency>
+      <groupId>au.com.dius</groupId>
+      <artifactId>pact-jvm-provider-junit_2.12</artifactId>
+      <version>4.0.0-beta.2</version>
+      <scope>test</scope>
+    </dependency>-->
+    <dependency>
+      <groupId>au.com.dius</groupId>
+      <artifactId>pact-jvm-provider-junit_2.12</artifactId>
+      <version>3.6.8</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>au.com.dius</groupId>
+      <artifactId>pact-jvm-model</artifactId>
+      <version>3.6.8</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>au.com.dius</groupId>
+      <artifactId>pact-jvm-core-support</artifactId>
+      <version>4.0.0-beta.2</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>au.com.dius</groupId>
+        <artifactId>pact-jvm-provider-maven_2.11</artifactId>
+        <version>3.5.24</version>
+        <configuration>
+          <serviceProviders>
+            <!-- You can define as many as you need, but each must have a unique name -->
+            <serviceProvider>
+              <name>BusService</name>
+              <!-- All the provider properties are optional, and have sensible defaults (shown below) -->
+              <protocol>https</protocol>
+              <host>localhost</host>
+              <port>8443</port>
+              <path>/</path>
+              <pactFileDirectories>
+                <pactFileDirectory>../pacts</pactFileDirectory>
+              </pactFileDirectories>
+             <!-- <insecure>true</insecure>-->
+              <trustStore>../Pact-JVM-Example-master/pact-jvm-512.jks</trustStore>
+              <trustStorePassword>password</trustStorePassword>
+                <createClient>
+                    // This is a Groovy script that will enable the client to accept self-signed certificates
+                    import org.apache.http.ssl.SSLContextBuilder
+                    import org.apache.http.conn.ssl.NoopHostnameVerifier
+                    import org.apache.http.impl.client.HttpClients
+                    HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier())
+                    .setSslcontext(new SSLContextBuilder().loadTrustMaterial(new File("C:/Users/anuraga/Desktop/Pact-JVM-Example-master/Pact-JVM-Example-master/pact-jvm-512.jks"), "password".toCharArray())
+                    .build())
+                    .build()
+                </createClient>
+            </serviceProvider>
+          </serviceProviders>
+          <pactBrokerUrl/>
+          <configuration>
+            <pact.verifier.publishResults>true</pact.verifier.publishResults>
+            <pact.showFullDiff>true</pact.showFullDiff>
+            <pact.showStacktrace>true</pact.showStacktrace>
+            <reports>
+              <report>console</report>
+              <report>markdown</report>
+            </reports>
+          </configuration>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.1</version>
+        <configuration>
+          <useSystemClassLoader>false</useSystemClassLoader>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,90 @@
+{
+  "provider": {
+    "name": "DummyService"
+  },
+  "consumer": {
+    "name": "DummyServiceClient"
+  },
+  "interactions": [
+    {
+      "description": "A request for employee name for the employee id 465",
+      "request": {
+        "method": "GET",
+        "path": "/v1/employee/465",
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "profile_image": "",
+          "employee_name": "Dinesh",
+          "employee_salary": 46,
+          "id": "465",
+          "employee_age": 28
+        },
+        "matchingRules": {
+          "body": {
+            "$.employee_name": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.id": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.employee_salary": {
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.employee_age": {
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ],
+              "combine": "AND"
+            },
+            "$.profile_image": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ],
+              "combine": "AND"
+            }
+          }
+        }
+      },
+      "providerStates": [
+        {
+          "name": "There is an employee with employee id 465"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    },
+    "pact-jvm": {
+      "version": "3.6.8"
+    }
+  }
+}
